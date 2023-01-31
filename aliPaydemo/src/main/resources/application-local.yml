@@ -1,0 +1,53 @@
+cusvar: local
+server:
+  port: 8084
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/my_star?useUnicode=true&characterEncodeing=utf-8
+    username: root
+    password: 12345678
+    driverClassName: com.mysql.jdbc.Driver
+    initialSize: 1
+    minIdle: 1
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 3600000
+    minEvictableIdleTimeMillis: 4000000
+    validationQuery: select 1 from dual
+    testWhileIdle: true
+    testOnReturn: false
+    testOnBorrow: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+      #配置监控统计拦截的filters，去掉后监控界面sql将无法统计,'wall'用于防火墙
+    filters: stat, wall, log4j
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+#mybatis:
+#  mapper-locations: classpath:mapper/*.xml
+#  config-location: classpath:mapper/config/personConfig.xml
+redis:
+  host: 172.0.0.1
+  password: 123456
+  port: 6379
+  timeout: 300000000 # 连接超时时间（毫秒）
+    # 连接池最大连接数（使用负值表示没有限制）
+  pool:
+    max-active: 200
+      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+    max-wait: -1
+      # 连接池中的最大空闲连接
+    max-idle: 8
+      # 连接池中的最小空闲连接
+    min-idle: 0
+alibaba:
+  appid: 2016092400584193
+  RsaPrivateKey: MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCiyaF06oT7kH/Jwwuyu5zuQ8Oq6e3EWGR5xY8y99d6k6aKSs8zcTqkQTUI4D4uSvyA8eQ31NALgQWwiTQG92BBRnFjHBLYy0cEEHIZQtr4U7x00XqkyzDNPJvNakvYxJYTw03CQlPFrrwHQyTdcL76tPsFdys4lGc9LUaFMUhoZUlGZu3FCbU+K401GpIPYFWNXSe9jld+F4iJSOymR8e5tWouCpUWSvfts3BJkXm+Cx1w1X/PMr8WHN/rY6guc7li+h8eeqmg1d4zvhG1W8X4WF9YRxeKM7NKrwzIaRv/4Z22q7Eikup9+7+Kd+tgaRuQfdfAOmtWucDMB/1sWU55AgMBAAECggEAGTL/NFsNZOfUcEYqLGvQei2xP2bg8JECVLtZVHl7OLVchXHZK0xu2HhjnlEgLwhamBdZza662d0KJW7HyABJPTGLYd05qaemAaIOF4z62pATzz2SL6pojozATYcT4KVl2f9UrSqZTzOiVbl2HnVSivqzFQCCh0qpxJWaogmj/MzZpUov81lGbfkUPuTMD3+FEt9AJu9JgrFaGeOasF+8btQNAEb58+se7YUi+c3VG6r+U6wjCvE77degjPHe7P4r6qPxdTPwpdtPF93xt/2egDdH5erlA+oReEdveuiMVqnhCp5gv6ycsx5w9/mRHwL21SEIWmpKG1KOMrfO6ZlCkQKBgQDdqYibkWIdlNrPN3ztnU+XTuQFFs0CTiPOcirW3aiYO6coymupEP3EpwwiYbZ2Iez+iiHZF3Y4nvqgzllMdsVlPjwUcGfPt2+PVVz/a9g/+eRaDTU98svvaR417tSmfkehA9dJ3Y3Z3pGIU8+nLDN05k/rz4/92Ad47uuMeLPQ9QKBgQC8AU3s7H0hB5PCJ64SJ/AtPS2Vdj6CB2EL17ykQYht4dGyqCHHvJmp3DBwbWyq5jpIN8Rp87X+LI2OqYISd2HLwgeylYLEq3N00PqbLw9VS9oKDrcIu8pyMIaTNr5XZYkjXrBIvCqHNF5HGbm52yGLG1Ufjsqp6kcmF/T1i/SE9QKBgCarUbqZ9Tzl3/owWun0/JKP37WHkcIqMZLtVc3gI25TUckK7xcycKLi5XoGA9e9+WM6Y8dEkYo1KdHtzaRKQAt2fPKv3VxeSub9ZFjmznXyuUSAc15YQf2FIBEWliBpfUN4sREgxoNQkaDvxhUK3/svxpeDwUHucvdE7vC1ieEVAoGBAIIm/QV6Kp4FGtuckLts/q6y3a3M8DUgWqTSM3wbChHX9U4Ta19VR6P6FWafuk0NmWeJg+Y9m85clZsf6jZSg1eF+cI+EwuIDiPe0L9B8wF/w3CXA0t+hgZLZb7gdSEX37qmwK955I85R9M9EgCCnVQqFeIE/nRnBd5vU1vyCdNJAoGBAIPrC5BaNv3cTSxk2NlxA5sSHP63MOUZdX2ge03ITqyQ+QmSWOdwmD16/vjZuEftJGXgL8+Ltnr4cUNpJdpsHAnPRe4F3norVykDmQS2p15aoA6KHsz8XYzzazHuOOg8HwBUEGKc5QFmgXZBcJBXcvXxiOgLRi/7egnTnRTj+mDx
+  notifyUrl: http://star362.nat200.top/alipay/notif
+  returnUrl: http://star362.nat200.top/returnUrl.html
+#  url: https://openapi.alipay.com/gateway.do  #正式地址
+  url: https://openapi.alipaydev.com/gateway.do
+  charset: UTF-8
+  format: json
+  AlipayPublicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuBqfoO9XDDskPVbHDP53GalMrdDW7bqdEsxXh0zsd7TeUqaphCAEeBPOpgIE7z2fg5IFsCzsUdrpcsuOtg/6osQJ0IICoJgO+kF6ADitBusZ5FFwPx3NN4MkPuqLHu8h3SRgV0HwpAR2A31VcaSeyA8yK7YhGgYA1Mr9GuS7tRQsOXfvoYqZ1KgUOFVf14pURpjVPpOGzSET3F4qn3SoO9a8+IHpskmyCCT3ay82QTLewpoE2iCcx0LrEoIeyg2xvrD+iKLOG3JKwDATL6EchzhrERE6TOzoZ3Lgq93MeV2ZI5sBVH4NRuaxMfT+ZXAeFbeqgzr2XplACHlrUIKMCQIDAQAB
+  logPath: /log
+  signtype: RSA2

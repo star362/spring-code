@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.joruns.test.demo.dao.WeChatData">
+
+
+	<select id="getAccessToken" parameterType="_int" resultType="com.joruns.test.demo.beans.WechatTokenMessage">
+		select m.id,m.message,m.type from wechat_token_message m where m.type=#{type}
+	</select>
+
+	<insert id="insertAccessToken" parameterType="com.joruns.test.demo.beans.WechatTokenMessage" useGeneratedKeys="true" keyProperty="com.joruns.test.demo.beans.WechatTokenMessage.id">
+		insert  into wechat_token_message (id,message,type) VALUE (#{id},#{message},#{type})
+	</insert>
+
+	<update id="updateAccessToken" parameterType="com.joruns.test.demo.beans.WechatTokenMessage" >
+		update wechat_token_message set message =#{message} where type =#{type}
+	</update>
+
+
+</mapper>

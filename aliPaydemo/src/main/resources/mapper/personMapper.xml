@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.joruns.test.demo.dao.UserDao">
+<!--主表-->
+	<resultMap id="provinceresultmap" type="province">
+		<id property="id" column="id"></id>
+		<result property="provinceNum" column="province_num"></result>
+		<result property="provinceName" column="province_name"></result>
+	</resultMap>
+<!--从表-->
+	<resultMap id="cityresultmap" type="city">
+		<id property="id" column="id"></id>
+		<result property="provId" column="prov_id"></result>
+		<result property="cityCode" column="city_code"></result>
+		<result property="cityName" column="city_name"></result>
+	</resultMap>
+	<resultMap id="townresultmap" type="town">
+		<id property="id" column="id"></id>
+		<result property="cityId" column="city_id"></result>
+		<result property="townName" column="town_name"></result>
+		<result property="townCode" column="town_code"></result>
+	</resultMap>
+
+	<resultMap id="prresult" extends="provinceresultmap" type="province">
+			<collection property="citys" ofType="city" >
+				<id property="id" column="fid"></id>
+				<result property="provId" column="prov_id"></result>
+				<result property="cityCode" column="city_code"></result>
+				<result property="cityName" column="city_name"></result>
+			</collection>
+	</resultMap>
+
+	<resultMap id="prresult1" type="city">
+		<id property="id" column="fid"></id>
+		<result property="provId" column="prov_id"></result>
+		<result property="cityCode" column="city_code"></result>
+		<result property="cityName" column="city_name"></result>
+		<association property="province1" javaType="province"   >
+			<id property="id" column="id"></id>
+			<result property="provinceNum" column="province_num"></result>
+			<result property="provinceName" column="province_name"></result>
+		</association>
+	</resultMap>
+
+	<resultMap id="selectzuhcong" type="province" extends="provinceresultmap">
+		<collection property="citys" ofType="city" select="selectshi" column="id"/>
+	</resultMap>
+
+	<resultMap id="xxx" type="city" extends="cityresultmap">
+		<collection property="town" ofType="town" select="selecttown" column="id"/>
+	</resultMap>
+
+	<select id="selectsheng" resultMap="selectzuhcong" parameterType="int">
+		select * from china_province where id=#{id}
+	</select>
+
+	<select id="selectshi" resultMap="xxx" parameterType="int">
+		select * from china_city where prov_id=#{id}
+	</select>
+
+	<select id="selecttown" parameterType="String" resultMap="townresultmap">
+		select * from china_town where city_id=#{id}
+	</select>
+
+	<select id="selAll" resultType="use" >
+		select * from user
+	</select>
+
+	<insert id="insertuser" parameterType="com.joruns.test.demo.beans.User" useGeneratedKeys="true" keyProperty="com.joruns.test.demo.beans.User.FID">
+		insert  into USER (UNAME,UAGE,COMMDATE) VALUE (#{UNAME},#{UAGE},#{COMMDATE})
+	</insert>
+
+	<insert id="insertuserlist" parameterType="com.joruns.test.demo.beans.User" useGeneratedKeys="true" keyProperty="com.joruns.test.demo.beans.User.FID">
+			insert  into USER (UNAME,UAGE,COMMDATE) VALUE
+			<foreach collection="list" index="index" item="item"  separator="," >
+				(#{item.UNAME},#{item.UAGE},#{item.COMMDATE})
+			</foreach>
+	</insert>
+
+	<select id="seleuserlisr" parameterType="_int[]" resultType="use">
+		select * from USER
+		<foreach collection="array" index="index" item="item" separator="," open=" where FID in ("  close=")">
+			#{item}
+		</foreach>
+		<include refid="order"/>
+	</select>
+
+	<sql id="order">
+		 order by FID desc
+	</sql>
+
+	<select id="selectdoubletable" parameterType="int" resultMap="prresult">
+       select p.id id,p.province_name province_name,p.province_num province_num,
+                 c.id fid,c.prov_id prov_id,c.city_code city_code,c.city_name city_name
+              		 from  china_province p LEFT JOIN china_city c  on p.id=c.prov_id
+	</select>
+
+	<select id="selectdoubletable1" parameterType="int" resultMap="prresult1">
+       select p.id id,p.province_name province_name,p.province_num province_num,
+                 c.id fid,c.prov_id prov_id,c.city_code city_code,c.city_name city_name
+              		 from  china_province p LEFT JOIN china_city c  on p.id=c.prov_id
+	</select>
+
+	<select id="getAccessToken" parameterType="_int" resultMap="tokenmessage">
+		select m.id,m.message,m.type from wechat_token_message m where m.type=#{type}
+	</select>
+
+	<insert id="insertAccessToken" parameterType="com.joruns.test.demo.beans.WechatTokenMessage" useGeneratedKeys="true" keyProperty="com.joruns.test.demo.beans.WechatTokenMessage.id">
+		insert  into wechat_token_message (id,message,type) VALUE (#{id},#{message},#{type})
+	</insert>
+
+	<update id="updateAccessToken" parameterType="com.joruns.test.demo.beans.WechatTokenMessage" >
+		update wechat_token_message set message =#{message} where type =#{type}
+	</update>
+
+
+</mapper>

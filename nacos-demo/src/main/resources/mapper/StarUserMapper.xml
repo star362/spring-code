@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nacos.dao.StarUserMapper">
+
+
+
+	<sql id="COLM_LIST_STAR_USER">
+				id	id,
+				user_name	userName,
+				user_age	userAge,
+				user_sex	userSex
+		</sql>
+
+
+	<sql id="COLM_TABLE_LIST_STAR_USER">
+				id,
+				user_name,
+				user_age,
+				user_sex
+		</sql>
+
+	<select id="finAllStarUser"	resultType="com.nacos.repistory.StarUser">
+		select <include refid="COLM_LIST_STAR_USER"/> from star_user
+	</select>
+
+	<select id="finFirstStarUser"	resultType="com.nacos.repistory.StarUser"	parameterType="com.nacos.repistory.StarUser">
+		select <include refid="COLM_LIST_STAR_USER"/> from star_user
+		<where>
+			<if test="id!= null" >
+				and	id	=	#{id}
+			</if>
+			<if test="userName!= null" >
+				and	user_name	=	#{userName}
+			</if>
+			<if test="userAge!= null" >
+				and	user_age	=	#{userAge}
+			</if>
+			<if test="userSex!= null" >
+				and	user_sex	=	#{userSex}
+			</if>
+		</where>
+	</select>
+
+	<update id="updateStarUser"		parameterType="com.nacos.repistory.StarUser">
+		update star_user
+		<set>
+			<if test="id!= null" >
+				id	=	#{id},
+			</if>
+			<if test="userName!= null" >
+				user_name	=	#{userName},
+			</if>
+			<if test="userAge!= null" >
+				user_age	=	#{userAge},
+			</if>
+			<if test="userSex!= null" >
+				user_sex	=	#{userSex},
+			</if>
+		</set>
+		<where>
+		<choose>
+			<when test="id!= null" >
+				and	id	=	#{id}
+			</when>
+			<when test="userName!= null" >
+				and	user_name	=	#{userName}
+			</when>
+			<when test="userAge!= null" >
+				and	user_age	=	#{userAge}
+			</when>
+			<when test="userSex!= null" >
+				and	user_sex	=	#{userSex}
+			</when>
+		</choose>
+		</where>
+	</update>
+
+	<delete id="deleteStarUser"		parameterType="com.nacos.repistory.StarUser">
+		delete star_user
+		<where>
+			<if test="id!= null" >
+				and	id	=	#{id}
+			</if>
+			<if test="userName!= null" >
+				and	user_name	=	#{userName}
+			</if>
+			<if test="userAge!= null" >
+				and	user_age	=	#{userAge}
+			</if>
+			<if test="userSex!= null" >
+				and	user_sex	=	#{userSex}
+			</if>
+		</where>
+	</delete>
+
+	<insert id="saveStarUser"		parameterType="com.nacos.repistory.StarUser">
+			insert into star_user(id,user_name,user_age,user_sex)
+				values(#{id},#{userName},#{userAge},#{userSex})
+		</insert>
+
+
+</mapper>

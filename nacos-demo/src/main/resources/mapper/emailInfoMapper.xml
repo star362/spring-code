@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nacos.dao.EmailInfoDao">
+
+
+    <sql id="bal_coml_list">
+	id id,
+    to_email toEmail,
+    remarks remarks,
+    subject subject,
+    state state,
+    depa depa
+	</sql>
+
+    <select id="selAll" resultType="emailinfo">
+        select <include refid="bal_coml_list"></include> from email_info where state=1
+    </select>
+
+
+    <select id="findfirstEmailInfo" resultType="emailinfo">
+        select <include refid="bal_coml_list"></include> from email_info
+        <where>
+            <if test="toEmail !=null and toEmail !=''">and to_email=#{toEmail}</if>
+            <if test="id !=null and id !=''">and id =#{id}</if>
+            <if test="state !=null and state !=''">and state =#{state}</if>
+            <if test="depa !=null and depa !=''">and depa =#{depa}</if>
+        </where>
+    </select>
+
+
+</mapper>

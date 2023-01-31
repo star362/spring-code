@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<settings>
+		<!--空值-->
+		<setting name="jdbcTypeForNull" value="NULL"/>
+		<!--驼峰-->
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		<!--sql打印-->
+		<setting name="logImpl" value="STDOUT_LOGGING" />
+	</settings>
+
+
+
+	<typeAliases>
+		<typeAlias type="com.joruns.test.demo.beans.User" alias="use"/>
+		<typeAlias type="com.joruns.test.demo.beans.Province" alias="province"/>
+		<typeAlias type="com.joruns.test.demo.beans.City" alias="city"/>
+		<typeAlias type="com.joruns.test.demo.beans.Town" alias="town"/>
+		<typeAlias type="com.joruns.test.demo.beans.WechatTokenMessage" alias="tokenmessage"/>
+		<!--<typeAlias alias="Long" type="java.lang.Long" />-->
+		<!--<typeAlias alias="String" type="java.lang.String" />-->
+		<!--<typeAlias alias="HashMap" type="java.util.HashMap" />-->
+		<!--<typeAlias alias="LinkedHashMap" type="java.util.LinkedHashMap" />-->
+		<!--<typeAlias alias="ArrayList" type="java.util.ArrayList" />-->
+		<!--<typeAlias alias="LinkedList" type="java.util.LinkedList" />-->
+	</typeAliases>
+
+</configuration>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="transactiiondemo.dao.EmailInfoDao">
+
+    <resultMap type="transactiiondemo.entity.EmailInfo" id="EmailInfoMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="toEmail" column="to_email" jdbcType="VARCHAR"/>
+        <result property="remarks" column="remarks" jdbcType="VARCHAR"/>
+        <result property="state" column="state" jdbcType="INTEGER"/>
+        <result property="depa" column="depa" jdbcType="VARCHAR"/>
+        <result property="subject" column="subject" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="EmailInfoMap">
+        select
+          id, to_email, remarks, state, depa, subject
+        from my_star.email_info
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="EmailInfoMap">
+        select
+          id, to_email, remarks, state, depa, subject
+        from my_star.email_info
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="EmailInfoMap">
+        select
+          id, to_email, remarks, state, depa, subject
+        from my_star.email_info
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="toEmail != null and toEmail != ''">
+                and to_email = #{toEmail}
+            </if>
+            <if test="remarks != null and remarks != ''">
+                and remarks = #{remarks}
+            </if>
+            <if test="state != null">
+                and state = #{state}
+            </if>
+            <if test="depa != null and depa != ''">
+                and depa = #{depa}
+            </if>
+            <if test="subject != null and subject != ''">
+                and subject = #{subject}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into my_star.email_info(to_email, remarks, state, depa, subject)
+        values (#{toEmail}, #{remarks}, #{state}, #{depa}, #{subject})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update my_star.email_info
+        <set>
+            <if test="toEmail != null and toEmail != ''">
+                to_email = #{toEmail},
+            </if>
+            <if test="remarks != null and remarks != ''">
+                remarks = #{remarks},
+            </if>
+            <if test="state != null">
+                state = #{state},
+            </if>
+            <if test="depa != null and depa != ''">
+                depa = #{depa},
+            </if>
+            <if test="subject != null and subject != ''">
+                subject = #{subject},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from my_star.email_info where id = #{id}
+    </delete>
+
+</mapper>

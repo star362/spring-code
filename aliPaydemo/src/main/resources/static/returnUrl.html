@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // document.write(window.location.search.split('=')[1])
+    // document.write('<br />')
+    // document.write(window.location.search)
+ document.write("支付宝订单号:"+GetQueryString("trade_no"))
+    document.write("商户订单号:"+GetQueryString("out_trade_no"))
+    document.write("金额:"+GetQueryString("total_amount"))
+
+    function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            return unescape(r[2]);
+        }else{
+            return null;
+        }
+
+    }
+</script>
+
+</body>
+</html>

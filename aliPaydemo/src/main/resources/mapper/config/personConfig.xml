@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<settings>
+		<!--空值-->
+		<setting name="jdbcTypeForNull" value="NULL"/>
+		<!--驼峰-->
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		<!--sql打印-->
+		<setting name="logImpl" value="STDOUT_LOGGING" />
+	</settings>
+
+
+
+	<typeAliases>
+
+		<!--<typeAlias alias="LinkedList" type="java.util.LinkedList" />-->
+	</typeAliases>
+
+</configuration>
