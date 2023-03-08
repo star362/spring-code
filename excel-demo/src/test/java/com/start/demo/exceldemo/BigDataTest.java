@@ -2,12 +2,16 @@ package com.start.demo.exceldemo;
 
 
 import cn.hutool.core.map.MapUtil;
+import cn.hutool.crypto.asymmetric.KeyType;
+import cn.hutool.crypto.asymmetric.RSA;
+import cn.hutool.crypto.digest.DigestUtil;
 import com.google.common.base.Joiner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Stream;
@@ -79,7 +83,7 @@ public class BigDataTest {
         map.put("traStation", "tripRecentForm.getTraStation()");
         map.put("version", "tripRecentForm.getVersion()");
 
-        //1.Guava
+       /* //1.Guava
         String content1 = Joiner.on("&").withKeyValueSeparator("=").join(map);
         System.out.println("content1:" + content1);
 
@@ -88,10 +92,68 @@ public class BigDataTest {
         map.forEach((key, value) -> stringBuffer.append(key).append("=").append(value).append("&"));
         String content2 = stringBuffer.deleteCharAt(stringBuffer.length() - 1).toString();
         System.out.println("content2:" + content2);
-
+*/
         //3.hutool工具类
         String content3 = MapUtil.sortJoin(map, "&", "=", true, null);
         System.out.println("content3:" + content3);
+
+
+        String S2 = DigestUtil.sha256Hex(content3);
+
+        String rsaSignPrivateKey = ""; //私钥通过 accessKey 查询
+
+//        RSA rsa = new RSA(rsaSignPrivateKey, null);
+        RSA rsa = new RSA();
+
+        System.out.println(rsa.encryptBase64(S2, KeyType.PrivateKey));
+    }
+
+    public static void main(String[] args) {
+        //签名/验签时，将参数名ASCII码从小到大排序
+        Map<String, Object> map = new TreeMap<String, Object>();
+        map.put("logicId", "logicId()");
+        map.put("cardType", "tripRecentForm.getCardType()");
+        map.put("traTime", "tripRecentForm.getTraTime()");
+        map.put("deviceId", "tripRecentForm.getDeviceId()");
+        map.put("traStation", "tripRecentForm.getTraStation()");
+        map.put("version", "tripRecentForm.getVersion()");
+
+       /* //1.Guava
+        String content1 = Joiner.on("&").withKeyValueSeparator("=").join(map);
+        System.out.println("content1:" + content1);
+
+        //2.StringBuffer
+        StringBuffer stringBuffer = new StringBuffer();
+        map.forEach((key, value) -> stringBuffer.append(key).append("=").append(value).append("&"));
+        String content2 = stringBuffer.deleteCharAt(stringBuffer.length() - 1).toString();
+        System.out.println("content2:" + content2);
+*/
+        //3.hutool工具类
+        String content3 = MapUtil.sortJoin(map, "&", "=", true, null);
+        System.out.println("content3:" + content3);
+
+
+        //签名/验签时，将参数名ASCII码从小到大排序
+        Map<String, Object> map2 = new HashMap<>();
+        map.put("logicId", "logicId()");
+        map.put("cardType", "tripRecentForm.getCardType()");
+        map.put("traTime", "tripRecentForm.getTraTime()");
+        map.put("deviceId", "tripRecentForm.getDeviceId()");
+        map.put("traStation", "tripRecentForm.getTraStation()");
+        map.put("version", "tripRecentForm.getVersion()");
+
+//3.hutool工具类
+        String content4 = MapUtil.sortJoin(map, "&", "=", true, null);
+        System.out.println("content4:" + content4);
+
+        String S2 = DigestUtil.sha256Hex(content3);
+
+        String rsaSignPrivateKey = ""; //私钥通过 accessKey 查询
+
+//        RSA rsa = new RSA(rsaSignPrivateKey, null);
+        RSA rsa = new RSA();
+
+//        System.out.println(rsa.encryptBase64(S2,  KeyType.PrivateKey));
     }
 
 }

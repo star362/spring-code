@@ -27,7 +27,7 @@ public interface StarUserRepository extends JpaRepository<StarUser, Integer>, Jp
                         .and(Sort.by("lastname").descending());
   * */
 
-    List<StarUser> findFirstById(Integer id, Sort sort);
+    StarUser findFirstById(Integer id, Sort sort);
 
     List<StarUser> findFirst3ByUserName(String name, Sort sort);
 

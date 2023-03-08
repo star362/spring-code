@@ -33,7 +33,7 @@ public class JpaController {
 
     @GetMapping("geton")
     public StarUser geton(){
-        return starUserRepository.findFirstById(1, Sort.by("userName").descending()).get(0);
+        return starUserRepository.findFirstById(19, Sort.by("userName").descending());
     }
 
     @GetMapping("findFirst3ByUserName")

@@ -4,13 +4,17 @@ package com.joruns.test.demo.util;
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.map.MapUtil;
+import cn.hutool.core.util.ObjUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.asymmetric.KeyType;
 import cn.hutool.crypto.asymmetric.RSA;
 import cn.hutool.crypto.digest.DigestUtil;
+import cn.hutool.json.JSON;
+import cn.hutool.json.JSONUtil;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
+import java.nio.ByteBuffer;
 import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -114,6 +118,15 @@ public class JdSignUtil implements InitializingBean {
         RSA rsa = new RSA(rsaSignPrivateKey, null);
 
         return rsa.decryptStr(SS1, KeyType.PrivateKey);
+    }
+
+
+    public static void main(String[] args) {
+        long l = System.currentTimeMillis() / 1000L;
+//        Long s = new Long(l);
+
+        System.out.println(ObjUtil.serialize(l));
+        System.out.println(ByteBuffer.allocate(Long.SIZE / Byte.SIZE).putLong(l).array());
     }
 
 
