@@ -2,6 +2,7 @@ package com.star.springbeandemo;
 
 import com.star.springbeandemo.config.PayParserFactory;
 import com.star.springbeandemo.config.SpringBeanUtils;
+import com.star.springbeandemo.zhoenjiemodel.Development;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -20,10 +21,13 @@ public class SpringbeanDemoApplication implements CommandLineRunner {
     private PayParserFactory payParserFactory;
 
 
+
     @Override
     public void run(String... args) throws Exception {
         log.info("===run =={}");
-        payParserFactory.getPayParser("market").selfAction();
+//        payParserFactory.getPayParser("market").selfAction();
+        payParserFactory.getPayParser("development").selfAction();
+        payParserFactory.getPayParser("development").selfAction();
     }
 }
 

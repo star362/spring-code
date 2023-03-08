@@ -1,8 +1,11 @@
 package com.star.springbeandemo.zhoenjiemodel;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,7 +15,13 @@ import org.springframework.stereotype.Component;
  * <p>
  */
 @Component
+@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+@Slf4j
 public class Development implements Department {
+
+    public Development() {
+        log.info("==================new Development");
+    }
 
     private static final Logger log = LoggerFactory.getLogger(Development.class);
 

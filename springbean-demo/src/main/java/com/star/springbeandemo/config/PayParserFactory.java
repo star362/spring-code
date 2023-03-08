@@ -1,9 +1,7 @@
 package com.star.springbeandemo.config;
 
 import com.star.springbeandemo.zhoenjiemodel.Department;
-import org.springframework.stereotype.Component;
 
-@Component
 public interface PayParserFactory {
 
     /**
