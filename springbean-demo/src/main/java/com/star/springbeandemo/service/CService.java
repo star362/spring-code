@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 //@Scope("prototype")
 public class CService {
 
-//    @Autowired
-//    private AService aService;
+    @Autowired
+    private AService aService;
 
 
 }

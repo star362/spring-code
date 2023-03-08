@@ -13,7 +13,7 @@ import javax.annotation.PreDestroy;
  * @date: 2020-02-18 14:25
  * @describe:
  */
-//@Slf4j
+@Slf4j
 //@Component
 public class TerminateBean {
 
@@ -23,7 +23,7 @@ public class TerminateBean {
 
     @PreDestroy
     public void preDestroy(){
-        System.out.println("============PreDestroy==========");
+        log.info("============PreDestroy==========");
         threadPoolTaskExecutor.shutdown();
     }
 

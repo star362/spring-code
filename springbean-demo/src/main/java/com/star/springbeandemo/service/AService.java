@@ -25,7 +25,7 @@ public class AService {
 
     @PostConstruct
     public void initme(){
-        System.out.println("======bbbb===============");
+        log.info("======bbbb===============");
     }
 
 

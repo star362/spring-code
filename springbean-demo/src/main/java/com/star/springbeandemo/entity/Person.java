@@ -1,4 +1,4 @@
-package com.star.springbeandemo.config;
+package com.star.springbeandemo.entity;
 
 /**
  * @author wangyu
