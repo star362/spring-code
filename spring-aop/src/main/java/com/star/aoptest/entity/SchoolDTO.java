@@ -1,6 +1,7 @@
 package com.star.aoptest.entity;
 
 import com.star.aoptest.aop.Annotations.Mask;
+import org.springframework.cglib.beans.BeanCopier;
 
 import java.io.Serializable;
 
@@ -11,12 +12,12 @@ import java.io.Serializable;
  * <p>
  */
 
-public class School implements Serializable {
+public class SchoolDTO implements Serializable {
 
     private static final long serialVersionUID = 932002574656009871L;
-    @Mask(prefixNoMaskLen = 1,suffixNoMaskLen = 1,maskStr = "&")
+    @Mask(prefixNoMaskLen = 1, suffixNoMaskLen = 1, maskStr = "&")
     private String name;
-    @Mask(prefixNoMaskLen = 0,suffixNoMaskLen = 2,maskStr = "A")
+    @Mask(prefixNoMaskLen = 0, suffixNoMaskLen = 2, maskStr = "A")
     private String address;
     private String email;
     private long mobile;
@@ -31,18 +32,18 @@ public class School implements Serializable {
         this.sch = sch;
     }
 
-    public School() {
+    public SchoolDTO() {
     }
 
-    public School(String name, String address, String email, long mobile,School sch) {
+    public SchoolDTO(String name, String address, String email, long mobile, School sch) {
         this.name = name;
         this.address = address;
         this.email = email;
         this.mobile = mobile;
-        this.sch=sch;
+        this.sch = sch;
     }
 
-    public School(String name, String address, String email, long mobile) {
+    public SchoolDTO(String name, String address, String email, long mobile) {
         this.name = name;
         this.address = address;
         this.email = email;
@@ -83,7 +84,7 @@ public class School implements Serializable {
 
     @Override
     public String toString() {
-        return "School{" +
+        return "SchoolDTO{" +
                 "name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", email='" + email + '\'' +
@@ -91,4 +92,31 @@ public class School implements Serializable {
                 ", sch=" + sch +
                 '}';
     }
+
+//    public static void main(String[] args) {
+//        School school = new School();
+//        school.setAddress("add");
+//        school.setEmail("163");
+//        school.setName("name");
+//        School schoolsch = new School();
+//        schoolsch.setAddress("addschoolsch");
+//        schoolsch.setEmail("163schoolsch");
+//        schoolsch.setName("nameschoolsch");
+//        school.setSch(schoolsch);
+//        SchoolDTO schoolDTO = new SchoolDTO();
+//
+//        BeanCopier.create(School.class, SchoolDTO.class, false)
+//                .copy(school,schoolDTO,null);
+//
+//        System.out.println("old" + school);
+//        System.out.println("new" + schoolDTO);
+//
+//        schoolsch.setAddress("==============");
+//        schoolDTO.setAddress("add2");
+//
+////        schoolDTO.setSch(schoolsch2);
+//        System.out.println("=============================" );
+//        System.out.println("old" + school);
+//        System.out.println("new" + schoolDTO);
+//    }
 }

@@ -9,14 +9,16 @@ import com.star.stardemo.service.CarService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -178,6 +180,19 @@ public class CarController {
 //        HttpClient httpClient = new HttpClient();
 
 
+        return "success";
+    }
+
+
+    @GetMapping("/aaa")
+    public String postaaa(@RequestBody(required = false) Map body, HttpServletResponse response) throws IOException {
+//        if (body == null || body.isEmpty()) {
+//            return "null";
+//        }else {
+//            return "not null";
+//        }
+
+        response.sendRedirect("http://localhost:8082/star/c");
         return "success";
     }
 

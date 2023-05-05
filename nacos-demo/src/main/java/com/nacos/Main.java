@@ -16,10 +16,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @描述
  */
 @EnableScheduling
-@EnableConfigurationProperties
+//@EnableConfigurationProperties
 @EnableAsync
-@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
-//@SpringBootApplication
+//@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
+@SpringBootApplication
 public class Main {
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);

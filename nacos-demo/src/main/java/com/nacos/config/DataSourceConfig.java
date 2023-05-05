@@ -25,7 +25,7 @@ import javax.sql.DataSource;
  * @describe:
  */
 //@Configuration
-    @ConditionalOnBean
+//    @ConditionalOnBean
 //@PropertySource(value = "classpath:application-local2.properties")
 //@PropertySource(value = "classpath:datasource-test.yml")
 //@MapperScan(basePackages = "com.nacos", sqlSessionFactoryRef = "PrimarySqlSessionFactory")//basePackages:接口文件的包路径
